@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E8F6EF; 
+    color: #2C3333; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #395B64; 
+    color: #F5F5F5; 
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    background-color: #2C3333; 
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* NAV PADRÃO */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #F5F5F5;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* NAV HAMBURGUER */
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.menu-toggle {
+    display: none;
+    position: absolute;
+    left: 15px;
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* MAIN */
+main {
+    flex-grow: 1;
+}
+
+.lista-carrinho {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* CARD */
+.item {
+    background: #A5C9CA;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px #395B64;
+
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* TEXTOS */
+h1 {
+    text-align: center;
+}
+
+h3 {
+    color: #2C3333;
+}
+
+p {
+    font-size: 1.1rem;
+}
+
+/* ================= FOOTER PADRÃO (COMPACTO) ================= */
+
+footer {
+    background-color: #395B64; 
+    color: #F5F5F5; 
+    padding: 15px 0; /* menor espaçamento vertical */
+    margin-top: 40px;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* REDUZIDO (antes 40px) */
+    flex-wrap: wrap;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer h3 {
+    margin: 0;
+    padding-bottom: 5px;
+    font-size: 14px;
+}
+
+footer li {
+    margin: 3px 0; /* deixa mais compacto */
+}
+
+footer a {
+    color: #F5F5F5;
+    text-decoration: none;
+}
+
+.autoresImg {
+    width: 15px;
+    height: 15px;
+}
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #2C3333;
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .item {
+        max-width: 95%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
