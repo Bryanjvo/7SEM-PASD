@@ -18,33 +18,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DrogaBryan - Catálogo de Produtos</title>
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/produto.css">
     <link rel="icon" type="image/x-icon" href="assets/img/drogabryan.png">
 </head>
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="index.jsp">Home</a></li>
-                <li><a href="produtos.jsp">Produtos</a></li>
-                <%-- Verifica se o usuário está logado, baseado em uma variável de sessão, por exemplo "nome" --%>
-                <%
-                    if (session.getAttribute("nome") == null) {
-                %>
-                    <li><a href="login.jsp">Login</a></li>
-                    <li><a href="cadcliente.jsp">Cadastro</a></li>
-                <%
-                    } else { 
-                %>
-                    <li><a href="carrinho.jsp">Carrinho</a></li>
-                    <li><a href="pedidos.jsp">Pedidos</a></li>
-                    <li><a href="perfil.jsp">Meu Perfil</a></li>
-                    <li><a href="logout">Logout</a></li>
-                <%
-                    }
-                %>
-            </ul>
-        </nav>
+    <div class="nav-container">
+
+        <!-- Botão hambúrguer -->
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+        <ul id="menu">
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="produtos.jsp">Produtos</a></li>
+
+            <%
+                if (session.getAttribute("nome") == null) {
+            %>
+                <li><a href="login.jsp">Login</a></li>
+                <li><a href="cadcliente.jsp">Cadastro</a></li>
+            <%
+                } else { 
+            %>
+                <li><a href="carrinho.jsp">Carrinho</a></li>
+                <li><a href="pedidos.jsp">Pedidos</a></li>
+                <li><a href="perfil.jsp">Meu Perfil</a></li>
+                <li><a href="logout">Logout</a></li>
+            <%
+                }
+            %>
+        </ul>
+
+    </div>
+</nav>
     </header>
 
     <main>
@@ -98,5 +105,10 @@
             </ul>
         </div>
     </footer>
+            <script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+}
+</script>
 </body>
 </html>

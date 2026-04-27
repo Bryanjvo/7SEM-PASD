@@ -1,7 +1,16 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : May 9, 2025, 7:54:49 PM
+    Author     : bryan
+*/
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #D9B6C6;
-    color: #f0f0f0;
+    background-color: #E8F6EF; 
+    color: #2C3333; 
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,14 +19,14 @@ body {
 }
 
 header {
-    background-color: #655D5D;
-    color: #f4f4f4;
+    background-color: #395B64; 
+    color: #F5F5F5; 
     padding: 10px 0;
     text-align: center;
 }
 
 nav {
-    background-color: #655D5D;
+    background-color: #2C3333; 
     padding: 15px 0;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -36,7 +45,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #f4f4f4;
+    color: #F5F5F5; 
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
@@ -46,12 +55,14 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #99858A;
-    color: #ffffff;
+    background-color: #A5C9CA; 
+    color: #2C3333; 
 }
 
+/* LINKS (fora do footer) */
 a {
-    color: #655D5D;
+    color: #395B64; 
+    text-decoration: none;
 }
 
 main {
@@ -72,37 +83,50 @@ section {
     text-align: justify;
     width: 850px;
     margin-bottom: 20px;
-    
 }
-.texto{
-    background-color: #e8e8e8;
-    color: #655D5D;
+
+.texto {
+    background-color: #F5F5F5; 
+    color: #2C3333; 
     padding: 20px;
     border-radius: 24px;
-    box-shadow: 0 2px 4px #655D5D;
+    box-shadow: 0 2px 4px #395B64;
 }
 
-
-
+/* FOOTER */
 footer {
-    background-color: #655D5D;
-    color: white;
+    background-color: #395B64; 
+    color: #F5F5F5; 
     padding: 20px 0;
     margin-top: 40px;
     font-size: 14px;
-    position: relative;
-    bottom: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* IMPORTANTE: base do layout */
 .footer-content {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 40px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    footer ul {
+        width: 100%;
+    }
 }
 
 footer ul {
@@ -121,9 +145,9 @@ footer p {
     text-align: center;
 }
 
-.autores,
-a {
-    color: white;
+/* CORRIGIDO: links só no footer */
+footer a {
+    color: #F5F5F5; 
     text-decoration: none;
 }
 
@@ -139,105 +163,107 @@ a {
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    
     gap: 20px;
-    
     max-width: 1200px;
-    
     margin: 0 auto;
-    
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #E8F6EF; 
     border-radius: 24px;
 }
 
 .item {
     margin: 1px;
-    background: #99858A;
+    background: #A5C9CA; 
     text-align: center;
     font-size: 1.2em;
-    
     border-radius: 24px;
     padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 4px 8px #655D5D;
-    
+    box-shadow: 0 4px 8px #395B64;
 }
 
 .imgProduto {
     width: 250px;
     height: 250px;
-    
     border-radius: 240px;
     margin-bottom: 10px;
 }
 
 h3 {
     font-size: 1.5rem;
-    margin: 2px 0;
-    color: #f0f0f0;
+    margin: 5px 0;
+    color: #2C3333;
 }
 
-h1 ,p {
+h1, p {
     text-align: center;
-    text-shadow: 2px 2px 5px #655D5D;
+    text-shadow: 2px 2px 5px #395B64;
     font-size: 1.5rem;
 }
-/* 
-p {
-    font-size: 1rem;
-    color: #f0f0f0;
-    margin: 5px 0;
-} */
 
-.comprarButton,
-.adicionarButton,
-.alterarButton,
-.excluirButton {
-    background-color: #655D5D;
-    color: #f0f0f0;
+button, .comprarButton, .adicionarButton, .alterarButton, .excluirButton {
+    background-color: #395B64;
+    color: #F5F5F5;
     border-radius: 4.5px;
     border: none;
     margin: 4px;
     padding: 6.5px;
-    width: 80px;
+    width: 100px;
     display: flex;
     justify-content: center;
     text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-.comprarButton:hover {
-    background-color: #d4c2ca;
-    color: #655D5D;
-    border-radius: 4.5px;
-    border-color: none;
-    padding: 6.5px;
+button:hover, .comprarButton:hover, .adicionarButton:hover, .alterarButton:hover {
+    background-color: #A5C9CA; 
+    color: #2C3333;
 }
 
-.adicionarButton:hover {
-    background-color: #d4c2ca;
-    color: #655D5D;
-    border-radius: 4.5px;
-    border-color: none;
-    padding: 6.5px;
+/* NAV RESPONSIVO */
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-.alterarButton:hover {
-    background-color: #d4c2ca;
-    color: #655D5D;
-    border-radius: 4.5px;
-    border-color: none;
-    padding: 6.5px;
+.menu-toggle {
+    display: none;
+    position: absolute;
+    left: 15px;
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: #F5F5F5;
+    cursor: pointer;
 }
 
-.excluirButton:hover {
-    background-color: #4e0707;
-    color: #655D5D;
-    border-radius: 4.5px;
-    border-color: none;
-    padding: 6.5px;
-}
+@media (max-width: 768px) {
 
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #2C3333;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        z-index: 1000;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}

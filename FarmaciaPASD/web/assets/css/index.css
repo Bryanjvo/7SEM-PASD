@@ -1,13 +1,3 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
-*/
-/* 
-    Created on : May 9, 2025, 7:54:49 PM
-    Author     : bryan
-*/
-
-
 body {
     font-family: Arial, sans-serif;
     background-color: #E8F6EF; 
@@ -19,7 +9,7 @@ body {
     min-height: 100vh;
 }
 
-
+/* HEADER */
 header {
     background-color: #395B64; 
     color: #F5F5F5; 
@@ -27,6 +17,7 @@ header {
     text-align: center;
 }
 
+/* NAVBAR */
 nav {
     background-color: #2C3333; 
     padding: 15px 0;
@@ -61,13 +52,13 @@ nav ul li a:hover {
     color: #2C3333; 
 }
 
-
+/* LINKS */
 a {
     color: #395B64; 
     text-decoration: none;
 }
 
-
+/* MAIN */
 main {
     flex-grow: 1;
 }
@@ -77,6 +68,7 @@ section {
     text-align: center;
 }
 
+/* CONTEÚDO */
 .aboutus {
     display: flex;
     flex-direction: column;
@@ -84,7 +76,9 @@ section {
     margin: auto;
     padding: 20px;
     text-align: justify;
-    width: 850px;
+    
+    width: 90%;
+    max-width: 850px;
     margin-bottom: 20px;
 }
 
@@ -96,14 +90,13 @@ section {
     box-shadow: 0 2px 4px #395B64;
 }
 
+/* FOOTER */
 footer {
     background-color: #395B64; 
     color: #F5F5F5; 
     padding: 20px 0;
     margin-top: 40px;
     font-size: 14px;
-    position: relative;
-    bottom: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -144,7 +137,7 @@ a {
     height: 15px;
 }
 
-
+/* GRID */
 .grid-template-columns-4 {
     grid-template-columns: repeat(4, 1fr);
 }
@@ -181,19 +174,26 @@ a {
     margin-bottom: 10px;
 }
 
+/* TEXTOS */
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 2px 2px 5px #395B64;
+}
+
 h3 {
     font-size: 1.5rem;
     margin: 5px 0;
     color: #2C3333;
 }
 
-h1, p {
+p {
+    font-size: 1rem;
     text-align: center;
     text-shadow: 2px 2px 5px #395B64;
-    font-size: 1.5rem;
 }
 
-
+/* BOTÕES */
 button, .comprarButton, .adicionarButton, .alterarButton, .excluirButton {
     background-color: #395B64;
     color: #F5F5F5;
@@ -211,4 +211,81 @@ button, .comprarButton, .adicionarButton, .alterarButton, .excluirButton {
 button:hover, .comprarButton:hover, .adicionarButton:hover, .alterarButton:hover {
     background-color: #A5C9CA; 
     color: #2C3333;
+}
+
+/* NAV RESPONSIVO */
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.menu-toggle {
+    display: none;
+    position: absolute;
+    left: 15px;
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: #F5F5F5;
+    cursor: pointer;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+
+    /* MENU */
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #2C3333;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        z-index: 1000;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    /* TEXTO */
+    h1 {
+        font-size: 1.5rem;
+        text-shadow: none;
+    }
+
+    p {
+        font-size: 0.95rem;
+        text-shadow: none;
+    }
+
+    /* IMAGEM */
+    .aboutus img {
+        width: 120px !important;
+    }
+
+    /* FOOTER */
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    /* BOTÕES */
+    button, .comprarButton {
+        width: 100%;
+        max-width: 200px;
+    }
 }

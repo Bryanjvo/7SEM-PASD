@@ -13,6 +13,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>DrogaBryan</title>
     <link rel="stylesheet" href="assets/css/index.css">
@@ -21,7 +22,11 @@
 <body>
 <header>
     <nav>
-        <ul>
+    <div class="nav-container">
+
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+        <ul id="menu">
             <li><a href="index.jsp">Home</a></li>
 
             <% if (usuario == null) { %>
@@ -40,7 +45,9 @@
                 <li><a href="logout">Logout</a></li>
             <% } %>
         </ul>
-    </nav>
+
+    </div>
+</nav>
 </header>
 <!-- resto da página continua igual -->
 <main>
@@ -113,6 +120,12 @@
             </ul>
         </div>
     </footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+}
+</script>
 
 </body>
 
