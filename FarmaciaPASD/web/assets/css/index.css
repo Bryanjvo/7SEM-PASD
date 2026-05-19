@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #E8F6EF; 
-    color: #2C3333; 
+    background-color: #E8F6EF;
+    color: #2C3333;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,34 +11,48 @@ body {
 
 /* HEADER */
 header {
-    background-color: #395B64; 
-    color: #F5F5F5; 
+    background-color: #395B64;
+    color: #F5F5F5;
     padding: 10px 0;
     text-align: center;
 }
 
-/* NAVBAR */
+/* ================= NAVBAR PADRONIZADA ================= */
 nav {
-    background-color: #2C3333; 
+    background-color: #2C3333;
     padding: 15px 0;
-    text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+}
+
+/* MENU DESKTOP */
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: center;
+    gap: 20px;
+    align-items: center;
 }
 
 nav ul li {
-    margin: 0 20px;
+    margin: 0;
 }
 
 nav ul li a {
-    color: #F5F5F5; 
+    color: #F5F5F5;
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
@@ -48,13 +62,39 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #A5C9CA; 
-    color: #2C3333; 
+    background-color: #A5C9CA;
+    color: #2C3333;
+}
+
+/* BOTÃO HAMBURGUER FIXO */
+.menu-toggle {
+    display: none !important;
+    position: absolute !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+
+    width: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    font-size: 28px !important;
+    color: #F5F5F5 !important;
+    cursor: pointer;
+    z-index: 2000;
+    line-height: 1;
 }
 
 /* LINKS */
 a {
-    color: #395B64; 
+    color: #395B64;
     text-decoration: none;
 }
 
@@ -76,15 +116,14 @@ section {
     margin: auto;
     padding: 20px;
     text-align: justify;
-    
     width: 90%;
     max-width: 850px;
     margin-bottom: 20px;
 }
 
 .texto {
-    background-color: #F5F5F5; 
-    color: #2C3333; 
+    background-color: #F5F5F5;
+    color: #2C3333;
     padding: 20px;
     border-radius: 24px;
     box-shadow: 0 2px 4px #395B64;
@@ -92,8 +131,8 @@ section {
 
 /* FOOTER */
 footer {
-    background-color: #395B64; 
-    color: #F5F5F5; 
+    background-color: #395B64;
+    color: #F5F5F5;
     padding: 20px 0;
     margin-top: 40px;
     font-size: 14px;
@@ -108,6 +147,7 @@ footer {
     justify-content: center;
     align-items: flex-start;
     gap: 40px;
+    flex-wrap: wrap;
 }
 
 footer ul {
@@ -127,8 +167,8 @@ footer p {
 }
 
 .autores,
-a {
-    color: #F5F5F5; 
+footer a {
+    color: #F5F5F5;
     text-decoration: none;
 }
 
@@ -149,13 +189,13 @@ a {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #E8F6EF; 
+    background-color: #E8F6EF;
     border-radius: 24px;
 }
 
 .item {
     margin: 1px;
-    background: #A5C9CA; 
+    background: #A5C9CA;
     text-align: center;
     font-size: 1.2em;
     border-radius: 24px;
@@ -193,8 +233,12 @@ p {
     text-shadow: 2px 2px 5px #395B64;
 }
 
-/* BOTÕES */
-button, .comprarButton, .adicionarButton, .alterarButton, .excluirButton {
+/* BOTÕES NORMAIS (sem afetar menu-toggle) */
+button:not(.menu-toggle),
+.comprarButton,
+.adicionarButton,
+.alterarButton,
+.excluirButton {
     background-color: #395B64;
     color: #F5F5F5;
     border-radius: 4.5px;
@@ -208,36 +252,19 @@ button, .comprarButton, .adicionarButton, .alterarButton, .excluirButton {
     transition: background-color 0.3s ease;
 }
 
-button:hover, .comprarButton:hover, .adicionarButton:hover, .alterarButton:hover {
-    background-color: #A5C9CA; 
+button:not(.menu-toggle):hover,
+.comprarButton:hover,
+.adicionarButton:hover,
+.alterarButton:hover {
+    background-color: #A5C9CA;
     color: #2C3333;
 }
 
-/* NAV RESPONSIVO */
-.nav-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.menu-toggle {
-    display: none;
-    position: absolute;
-    left: 15px;
-    font-size: 26px;
-    background: none;
-    border: none;
-    color: #F5F5F5;
-    cursor: pointer;
-}
-
-/* RESPONSIVIDADE */
+/* ================= RESPONSIVIDADE ================= */
 @media (max-width: 768px) {
 
-    /* MENU */
     .menu-toggle {
-        display: block;
+        display: block !important;
     }
 
     nav ul {
@@ -246,9 +273,11 @@ button:hover, .comprarButton:hover, .adicionarButton:hover, .alterarButton:hover
         width: 100%;
         background-color: #2C3333;
         position: absolute;
-        top: 60px;
+        top: 100%;
         left: 0;
-        z-index: 1000;
+        padding: 20px 0;
+        gap: 10px;
+        z-index: 1500;
     }
 
     nav ul.show {
@@ -256,10 +285,10 @@ button:hover, .comprarButton:hover, .adicionarButton:hover, .alterarButton:hover
     }
 
     nav ul li {
-        margin: 10px 0;
+        text-align: center;
+        width: 100%;
     }
 
-    /* TEXTO */
     h1 {
         font-size: 1.5rem;
         text-shadow: none;
@@ -270,12 +299,10 @@ button:hover, .comprarButton:hover, .adicionarButton:hover, .alterarButton:hover
         text-shadow: none;
     }
 
-    /* IMAGEM */
     .aboutus img {
         width: 120px !important;
     }
 
-    /* FOOTER */
     .footer-content {
         flex-direction: column;
         align-items: center;
@@ -283,8 +310,8 @@ button:hover, .comprarButton:hover, .adicionarButton:hover, .alterarButton:hover
         gap: 20px;
     }
 
-    /* BOTÕES */
-    button, .comprarButton {
+    button:not(.menu-toggle),
+    .comprarButton {
         width: 100%;
         max-width: 200px;
     }
