@@ -66,13 +66,13 @@
                         <%-- Altere o src abaixo para utilizar a imagem real, se a classe possuir essa informação --%>
                         <img class="imgProduto" src="<%= produto.getImagem() %>" alt="Imagem do Produto">
                         <%-- <h3>ID: <%= produto.getId() %></h3> --%>
-                        <h3>Nome: <%= produto.getNome() %></h3>
-                        <p>Preço: R$<%= produto.getPreco() %></p>
-                        <p>Receita: <%= produto.isReceita() ? "Sim" : "Não" %></p>
+                        <h3><%= produto.getNome() %></h3>
+                        <p>R$<%= produto.getPreco() %></p>
+                        <p><%= produto.isReceita() ? "Necessário receita médica" : "" %></p>
                         <%-- Link para efetuar a compra/pedido do produto (ajuste o caminho conforme sua estrutura) --%>
-                        <button class="comprarButton">
+                        
                             <a href="AdicionarCarrinho?idproduto=<%= produto.getId() %>&quantidade=1" class="comprarButton">Adicionar ao carrinho</a>
-                        </button>
+                        
                     </div>
                 <%
                     }

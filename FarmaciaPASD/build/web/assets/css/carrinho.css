@@ -205,9 +205,18 @@ footer a {
 }
 
 .frete-form input {
-    padding: 8px;
+    padding: 10px 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
+    font-size: 16px; /* remove zoom no celular */
+    width: 180px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.frete-form input:focus {
+    border-color: #395B64;
+    box-shadow: 0 0 5px rgba(57, 91, 100, 0.3);
 }
 
 /* TEXTOS */
