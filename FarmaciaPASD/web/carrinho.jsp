@@ -79,17 +79,26 @@
     <img class="imgProduto" src="<%= itemcarrinho.getProduto().getImagem() %>">
 
     <h3><%= itemcarrinho.getProduto().getNome() %></h3>
-    <p>Preço: R$<%= itemcarrinho.getProduto().getPreco() %></p>
-    <p>Quantidade: <%= itemcarrinho.getQuantidade() %></p>
-    <p>Subtotal: R$<%= String.format("%.2f", subtotal) %></p>
 
-    <a href="AdicionarCarrinho?idproduto=<%= itemcarrinho.getProduto().getId() %>&quantidade=1" class="comprarButton">+</a>
+    <div class="item-info-acoes">
+        
+        <div class="item-info">
+            <p>Preço: R$<%= itemcarrinho.getProduto().getPreco() %></p>
+            <p>Quantidade: <%= itemcarrinho.getQuantidade() %></p>
+            <p>Subtotal: R$<%= String.format("%.2f", subtotal) %></p>
+        </div>
 
-    <% if(itemcarrinho.getQuantidade() > 1){ %>
-        <a href="DiminuirProdutoCarrinho?idproduto=<%= itemcarrinho.getProduto().getId() %>&quantidade=1" class="comprarButton">-</a>
-    <% } else { %>
-        <a href="ExcluirProdutoCarrinho?idproduto=<%= itemcarrinho.getProduto().getId() %>&quantidade=1" class="comprarButton">🗑</a>
-    <% } %>
+        <div class="item-acoes">
+            <a href="AdicionarCarrinho?idproduto=<%= itemcarrinho.getProduto().getId() %>&quantidade=1" class="comprarButton">+</a>
+
+            <% if(itemcarrinho.getQuantidade() > 1){ %>
+                <a href="DiminuirProdutoCarrinho?idproduto=<%= itemcarrinho.getProduto().getId() %>&quantidade=1" class="comprarButton">-</a>
+            <% } else { %>
+                <a href="ExcluirProdutoCarrinho?idproduto=<%= itemcarrinho.getProduto().getId() %>&quantidade=1" class="comprarButton">🗑</a>
+            <% } %>
+        </div>
+
+    </div>
 </div>
 
 <% } %>

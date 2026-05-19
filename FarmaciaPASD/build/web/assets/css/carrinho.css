@@ -17,8 +17,7 @@ header {
     text-align: center;
 }
 
-/* ================= NAVBAR PADRONIZADA ================= */
-
+/* NAVBAR */
 nav {
     background-color: #2C3333;
     padding: 15px 0;
@@ -37,7 +36,6 @@ nav {
     min-height: 40px;
 }
 
-/* MENU DESKTOP */
 nav ul {
     list-style: none;
     padding: 0;
@@ -54,7 +52,7 @@ nav ul li a {
     font-weight: bold;
     padding: 10px 15px;
     border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: 0.3s;
 }
 
 nav ul li a:hover {
@@ -62,7 +60,7 @@ nav ul li a:hover {
     color: #2C3333;
 }
 
-/* BOTÃO HAMBURGUER FIXO */
+/* MENU MOBILE */
 .menu-toggle {
     display: none;
     position: absolute;
@@ -75,9 +73,6 @@ nav ul li a:hover {
     color: #F5F5F5;
     cursor: pointer;
     z-index: 2000;
-    width: auto;
-    padding: 0;
-    margin: 0;
 }
 
 /* LINKS */
@@ -90,13 +85,15 @@ main {
     flex-grow: 1;
 }
 
-section {
-    padding: 20px;
+/* TÍTULO */
+h1 {
     text-align: center;
+    font-size: 2rem;
+    margin: 35px 0 25px 0;
+    color: #2C3333;
 }
 
-/* ================= FOOTER ================= */
-
+/* FOOTER */
 footer {
     background-color: #395B64;
     color: #F5F5F5;
@@ -130,7 +127,6 @@ footer h3 {
 .autores,
 footer a {
     color: #F5F5F5;
-    text-decoration: none;
 }
 
 .autoresImg {
@@ -138,7 +134,15 @@ footer a {
     height: 15px;
 }
 
-/* ================= CARRINHO ================= */
+/* CARRINHO */
+.lista-carrinho {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
 .item {
     display: flex;
@@ -159,13 +163,40 @@ footer a {
     border-radius: 12px;
 }
 
-.lista-carrinho {
+.item h3 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* INFO + AÇÕES */
+.item-info-acoes {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.item-info {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+    align-items: flex-start;
+    text-align: left;
+    flex: 1;
+}
+
+.item-info p {
+    margin: 4px 0;
+    font-size: 1rem;
+}
+
+.item-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 }
 
 /* TOTAL */
@@ -184,7 +215,7 @@ footer a {
 
 .finalizarButton {
     background-color: #395B64;
-    color: #fff;
+    color: white;
     border: none;
     border-radius: 6px;
     padding: 10px 20px;
@@ -208,47 +239,26 @@ footer a {
     padding: 10px 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
-    font-size: 16px; /* remove zoom no celular */
+    font-size: 16px;
     width: 180px;
     box-sizing: border-box;
     outline: none;
 }
 
-.frete-form input:focus {
-    border-color: #395B64;
-    box-shadow: 0 0 5px rgba(57, 91, 100, 0.3);
-}
-
-/* TEXTOS */
-h3 {
-    font-size: 1.5rem;
-    margin: 5px 0;
-    color: #2C3333;
-}
-
-h1,
-p {
-    text-align: center;
-    text-shadow: 2px 2px 5px #395B64;
-    font-size: 1.2rem;
-}
-
+/* BOTÕES */
 button,
 .comprarButton {
     background-color: #395B64;
     color: #F5F5F5;
-    border-radius: 4.5px;
+    border-radius: 8px;
     border: none;
-    margin: 4px;
     padding: 10px 14px;
-    width: auto;
     display: flex;
     justify-content: center;
-    align-items: center; /* corrige alinhamento vertical */
+    align-items: center;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: 0.3s;
     font-size: 16px;
-    line-height: 1;
     cursor: pointer;
 }
 
@@ -258,9 +268,7 @@ button:hover,
     color: #2C3333;
 }
 
-/* ================= MOBILE ================= */
-
-/* ================= MOBILE ================= */
+/* MOBILE */
 @media (max-width: 768px) {
 
     .menu-toggle {
@@ -284,28 +292,25 @@ button:hover,
         display: flex;
     }
 
-    nav ul li {
-        text-align: center;
-    }
-
     .footer-content {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 20px;
     }
 
-    /* CARD MOBILE */
+    h1 {
+        font-size: 1.6rem;
+        margin: 25px 0 20px 0;
+    }
+
     .item {
         flex-direction: column;
         align-items: center;
-        text-align: center;
-        background: #FFFFFF;
+        background: white;
         padding: 20px;
         border-radius: 22px;
         box-shadow: 0 6px 18px rgba(57, 91, 100, 0.18);
-        gap: 10px;
-        margin-bottom: 15px;
+        gap: 12px;
     }
 
     .imgProduto {
@@ -317,24 +322,24 @@ button:hover,
         border-radius: 16px;
     }
 
-    h1 {
-        font-size: 1.6rem;
-        text-shadow: none;
-        margin-bottom: 25px;
+    .item-info-acoes {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
     }
 
-    h3 {
-        font-size: 1.2rem;
-        margin: 8px 0 4px 0;
+    .item-info {
+        align-items: flex-start;
+        text-align: left;
     }
 
-    p {
-        font-size: 0.95rem;
-        margin: 2px 0;
-        text-shadow: none;
+    .item-acoes {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 
-    /* BOTÕES + - lixeira */
     .comprarButton {
         width: 42px;
         height: 42px;
@@ -342,42 +347,26 @@ button:hover,
         font-size: 20px;
         font-weight: bold;
         padding: 0;
-        margin-top: 8px;
     }
 
-    /* FORM DE FRETE */
     .frete-form form {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        gap: 12px;
     }
 
-    .frete-form input {
-        width: 100%;
-        max-width: 280px;
-    }
-
-    .frete-form button {
+    .frete-form input,
+    .frete-form button,
+    .finalizarButton {
         width: 100%;
         max-width: 280px;
         height: 46px;
         border-radius: 12px;
     }
 
-    /* TOTAL */
     .total-carrinho {
         margin: 20px 15px;
         padding: 20px;
         border-radius: 18px;
-    }
-
-    .finalizarButton {
-        width: 100%;
-        max-width: 280px;
-        height: 48px;
-        font-size: 16px;
-        font-weight: bold;
-        border-radius: 12px;
     }
 }
