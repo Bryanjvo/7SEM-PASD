@@ -14,54 +14,54 @@
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrogaBryan - Catálogo de Produtos</title>
-    <link rel="stylesheet" href="assets/css/produto.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/drogabryan.png">
-</head>
-<body>
-    <header>
-        <nav>
-    <div class="nav-container">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DrogaBryan - Catálogo de Produtos</title>
+        <link rel="stylesheet" href="assets/css/produto.css">
+        <link rel="icon" type="image/x-icon" href="assets/img/drogabryan.png">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="nav-container">
 
-        <!-- Botão hambúrguer -->
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+                    <!-- Botão hambúrguer -->
+                    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-        <ul id="menu">
-            <li><a href="index.jsp">Home</a></li>
-            <li><a href="produtos.jsp">Produtos</a></li>
+                    <ul id="menu">
+                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="produtos.jsp">Produtos</a></li>
 
-            <%
-                if (session.getAttribute("nome") == null) {
-            %>
-                <li><a href="login.jsp">Login</a></li>
-                <li><a href="cadcliente.jsp">Cadastro</a></li>
-            <%
-                } else { 
-            %>
-                <li><a href="carrinho.jsp">Carrinho</a></li>
-                <li><a href="pedidos.jsp">Pedidos</a></li>
-                <li><a href="perfil.jsp">Meu Perfil</a></li>
-                <li><a href="logout">Logout</a></li>
-            <%
-                }
-            %>
-        </ul>
+                        <%
+                            if (session.getAttribute("nome") == null) {
+                        %>
+                        <li><a href="login.jsp">Login</a></li>
+                        <li><a href="cadcliente.jsp">Cadastro</a></li>
+                            <%
+                                } else { 
+                            %>
+                        <li><a href="carrinho.jsp">Carrinho</a></li>
+                        <li><a href="pedidos.jsp">Pedidos</a></li>
+                        <li><a href="perfil.jsp">Meu Perfil</a></li>
+                        <li><a href="logout">Logout</a></li>
+                            <%
+                                }
+                            %>
+                    </ul>
 
-    </div>
-</nav>
-    </header>
+                </div>
+            </nav>
+        </header>
 
-    <main>
-        <div>
-            <h1>Catálogo de Produtos</h1>
-            <section class="grid grid-template-columns-4">
-                <%
-                    // Laço para iterar pelos produtos e exibi-los
-                    for (Produtos produto : listaProdutos) {
-                %>
+        <main>
+            <div>
+                <h1>Catálogo de Produtos</h1>
+                <section class="grid grid-template-columns-4">
+                    <%
+                        // Laço para iterar pelos produtos e exibi-los
+                        for (Produtos produto : listaProdutos) {
+                    %>
                     <div class="item">
                         <%-- Altere o src abaixo para utilizar a imagem real, se a classe possuir essa informação --%>
                         <img class="imgProduto" src="<%= produto.getImagem() %>" alt="Imagem do Produto">
@@ -70,45 +70,75 @@
                         <p>R$<%= produto.getPreco() %></p>
                         <p><%= produto.isReceita() ? "Necessário receita médica" : "" %></p>
                         <%-- Link para efetuar a compra/pedido do produto (ajuste o caminho conforme sua estrutura) --%>
-                        
-                            <a href="AdicionarCarrinho?idproduto=<%= produto.getId() %>&quantidade=1" class="comprarButton">Adicionar ao carrinho</a>
-                        
-                    </div>
-                <%
-                    }
-                %>
-            </section>
-        </div>
-    </main>
 
-    <footer>
-        <div class="footer-content">
-            <ul class="autores">
-                <h3>Autor</h3>
-                <li> <img class="autoresImg" src="assets/img/github-mark.png"> <a href="https://github.com/Bryanjvo">Bryan</a></li>
-            </ul>
-            <ul>
-                <h3>Contato</h3>
-                <li> <img class="autoresImg" src="assets/img/telefone.png"> (61) 91234-5678</li>
-                <li> <img class="autoresImg" src="assets/img/email.png"> <a style="color: white;" href="mailto:#">drogabryan@gmail.com</a></li>
-            </ul>
-            <ul>
-                <h3>Endereço</h3>
-                <li>CEP: 260.333-299</li>
-                <li>CNB 10</li>
-                <li>Taguatinga - Brasília/DF</li>
-            </ul>
-            <ul>
-                <h3>Redes Sociais</h3>
-                <li> <img class="autoresImg" src="assets/img/ig icon.png"> <a href="#">Instagram</a></li>
-                <li> <img class="autoresImg" src="assets/img/whatsapp.png"> <a href="#">WhatsApp</a></li>
-            </ul>
+                        <a href="AdicionarCarrinho?idproduto=<%= produto.getId() %>&quantidade=1" class="comprarButton">Adicionar ao carrinho</a>
+
+                    </div>
+                    <%
+                        }
+                    %>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <ul class="autores">
+                    <h3>Autor</h3>
+                    <li> <img class="autoresImg" src="assets/img/github-mark.png"> <a href="https://github.com/Bryanjvo">Bryan</a></li>
+                </ul>
+                <ul>
+                    <h3>Contato</h3>
+                    <li> <img class="autoresImg" src="assets/img/telefone.png"> (61) 91234-5678</li>
+                    <li> <img class="autoresImg" src="assets/img/email.png"> <a style="color: white;" href="mailto:#">drogabryan@gmail.com</a></li>
+                </ul>
+                <ul>
+                    <h3>Endereço</h3>
+                    <li>CEP: 260.333-299</li>
+                    <li>CNB 10</li>
+                    <li>Taguatinga - Brasília/DF</li>
+                </ul>
+                <ul>
+                    <h3>Redes Sociais</h3>
+                    <li> <img class="autoresImg" src="assets/img/ig icon.png"> <a href="#">Instagram</a></li>
+                    <li> <img class="autoresImg" src="assets/img/whatsapp.png"> <a href="#">WhatsApp</a></li>
+                </ul>
+            </div>
+        </footer>
+        <!-- BOTTOM NAVIGATION -->
+
+        <div class="bottom-nav">
+
+            <a href="index.jsp" class="bottom-item">
+                <span>🏠</span>
+                <p>Home</p>
+            </a>
+
+            <a href="produtos.jsp" class="bottom-item active">
+                <span>🛍</span>
+                <p>Produtos</p>
+            </a>
+
+            <a href="carrinho.jsp" class="bottom-item">
+                <span>🛒</span>
+                <p>Carrinho</p>
+            </a>
+
+            <a href="pedidos.jsp" class="bottom-item">
+                <span>📦</span>
+                <p>Pedidos</p>
+            </a>
+
+            <a href="perfil.jsp" class="bottom-item">
+                <span>👤</span>
+                <p>Perfil</p>
+            </a>
+
         </div>
-    </footer>
-            <script>
-function toggleMenu() {
-    document.getElementById("menu").classList.toggle("show");
-}
-</script>
-</body>
+        <script>
+            function toggleMenu() {
+                document.getElementById("menu").classList.toggle("show");
+            }
+        </script>
+    </body>
 </html>

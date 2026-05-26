@@ -1,6 +1,6 @@
 <%-- 
     Document   : perfil
-    Created on : May 12, 2025, 4:45:36 PM
+    Created on : May 12, 2025, 4:45:36 PM
     Author     : bryan
 --%>
 
@@ -26,12 +26,19 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul>
+
+<header>
+    <nav>
+
+        <div class="nav-container">
+
+            <!-- MENU HAMBURGUER -->
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+            <ul id="menu">
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="produtos.jsp">Produtos</a></li>
-                <%-- Verifica se o usuário está logado, baseado em uma variável de sessão, por exemplo "nome" --%>
+
                 <%
                     if (session.getAttribute("nome") == null) {
                 %>
@@ -48,56 +55,153 @@
                     }
                 %>
             </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section>
-            <div class="form">
-                <h1>Perfil de Cliente</h1>
-                <br>
-                <h4 class="dados">Seus Dados:</h4>
-                <br>
-                
-                <p>Seu nome: <%= session.getAttribute("nome") %> </p>
-                <p>Seu e-mail: <%= session.getAttribute("email") %> </p>
-                <p>Seu endereço: <%= session.getAttribute("endereco") %> </p>
-
-                <br>
-                <h4 class="opcoes">Opções</h4>
-                <br>
-                <a href="cadcliente.jsp">Cadastrar Nova Conta</a>
-                <a href="pedidos.jsp">Meus Pedidos</a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <ul class="autores">
-                <h3>Autor</h3>
-                <li> <img class="autoresImg" src="assets/img/github-mark.png"> <a href="https://github.com/Bryanjvo">Bryan</a></li>
-            </ul>
-            <ul>
-                <h3>Contato</h3>
-                <li> <img class="autoresImg" src="assets/img/telefone.png"> (61) 91234-5678</li>
-                <li> <img class="autoresImg" src="assets/img/email.png"> <a style="color: white;" href="mailto:#">drogabryan@gmail.com</a></li>
-            </ul>
-            <ul>
-                <h3>Endereço</h3>
-                <li>CEP: 260.333-299</li>
-                <li>CNB 10</li>
-                <li>Taguatinga - Brasília/DF</li>
-            </ul>
-            <ul>
-                <h3>Redes Sociais</h3>
-                <li> <img class="autoresImg" src="assets/img/ig icon.png"> <a href="#">Instagram</a></li>
-                <li> <img class="autoresImg" src="assets/img/whatsapp.png"> <a href="#">WhatsApp</a></li>
-            </ul>
         </div>
-    </footer>
+
+    </nav>
+</header>
+
+<main>
+
+    <section class="perfil-section">
+
+        <div class="form">
+
+            <div class="perfil-topo">
+                <div class="perfil-avatar">👤</div>
+
+                <div>
+                    <h1>Meu Perfil</h1>
+                    <p class="subtitulo">Área do cliente DrogaBryan</p>
+                </div>
+            </div>
+
+            <div class="info-group">
+
+                <h4 class="dados">Seus Dados</h4>
+
+                <div class="info-card">
+                    <span>Nome</span>
+                    <p><%= session.getAttribute("nome") %></p>
+                </div>
+
+                <div class="info-card">
+                    <span>E-mail</span>
+                    <p><%= session.getAttribute("email") %></p>
+                </div>
+
+                <div class="info-card">
+                    <span>Endereço</span>
+                    <p><%= session.getAttribute("endereco") %></p>
+                </div>
+
+            </div>
+
+            <div class="acoes">
+
+                <h4 class="opcoes">Opções</h4>
+
+                <a href="pedidos.jsp" class="perfil-btn">
+                    📦 Meus Pedidos
+                </a>
+
+                <a href="cadcliente.jsp" class="perfil-btn">
+                    ➕ Cadastrar Nova Conta
+                </a>
+
+                <a href="logout" class="perfil-btn sair">
+                    🚪 Sair da Conta
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+
+        <ul class="autores">
+            <h3>Autor</h3>
+            <li>
+                <img class="autoresImg" src="assets/img/github-mark.png">
+                <a href="https://github.com/Bryanjvo">Bryan</a>
+            </li>
+        </ul>
+
+        <ul>
+            <h3>Contato</h3>
+            <li>
+                <img class="autoresImg" src="assets/img/telefone.png">
+                (61) 91234-5678
+            </li>
+            <li>
+                <img class="autoresImg" src="assets/img/email.png">
+                <a href="mailto:#">drogabryan@gmail.com</a>
+            </li>
+        </ul>
+
+        <ul>
+            <h3>Endereço</h3>
+            <li>CEP: 260.333-299</li>
+            <li>CNB 10</li>
+            <li>Taguatinga - Brasília/DF</li>
+        </ul>
+
+        <ul>
+            <h3>Redes Sociais</h3>
+            <li>
+                <img class="autoresImg" src="assets/img/ig icon.png">
+                <a href="#">Instagram</a>
+            </li>
+            <li>
+                <img class="autoresImg" src="assets/img/whatsapp.png">
+                <a href="#">WhatsApp</a>
+            </li>
+        </ul>
+
+    </div>
+</footer>
+
+<!-- BOTTOM NAVIGATION -->
+
+<div class="bottom-nav">
+
+    <a href="index.jsp" class="bottom-item">
+        <span>🏠</span>
+        <p>Home</p>
+    </a>
+
+    <a href="produtos.jsp" class="bottom-item">
+        <span>🛍</span>
+        <p>Produtos</p>
+    </a>
+
+    <a href="carrinho.jsp" class="bottom-item">
+        <span>🛒</span>
+        <p>Carrinho</p>
+    </a>
+
+    <a href="pedidos.jsp" class="bottom-item">
+        <span>📦</span>
+        <p>Pedidos</p>
+    </a>
+
+    <a href="perfil.jsp" class="bottom-item active">
+        <span>👤</span>
+        <p>Perfil</p>
+    </a>
+
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+}
+</script>
 
 </body>
-
 </html>
- 
