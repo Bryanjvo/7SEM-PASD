@@ -383,3 +383,13 @@ footer a {
         color: #2C3333;
     }
 }
+
+/* tirando footer*/
+
+@media (max-width: 768px) {
+
+    footer {
+        display: none;
+    }
+
+}

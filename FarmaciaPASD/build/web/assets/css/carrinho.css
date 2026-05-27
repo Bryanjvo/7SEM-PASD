@@ -456,3 +456,13 @@ button:hover,
         margin-bottom: 20px;
     }
 }
+
+/* tirando footer*/
+
+@media (max-width: 768px) {
+
+    footer {
+        display: none;
+    }
+
+}

@@ -147,7 +147,7 @@ nav ul li a:hover {
 /* CATEGORIAS */
 
 .categorias {
-    padding: 40px 20px;
+    padding: 0px 20px 40px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -451,4 +451,12 @@ footer a {
     footer {
         margin-bottom: 20px;
     }
+}
+
+@media (max-width: 768px) {
+
+    footer {
+        display: none;
+    }
+
 }
