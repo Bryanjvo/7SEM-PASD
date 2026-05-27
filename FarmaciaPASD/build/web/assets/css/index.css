@@ -21,16 +21,23 @@ nav {
     background-color: #2C3333;
     padding: 15px 0;
     position: relative;
+    min-height: 70px; /* CORRIGE ALTURA DA NAVBAR */
+    display: flex;
+    align-items: center;
 }
 
 .nav-container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+
     position: relative;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    min-height: 70px; /* AUMENTA ALTURA */
 }
 
 nav ul {
@@ -59,15 +66,28 @@ nav ul li a:hover {
 
 .menu-toggle {
     display: none;
+
     position: absolute;
     left: 20px;
     top: 50%;
+
     transform: translateY(-50%);
+
     background: none;
     border: none;
+
     color: white;
-    font-size: 28px;
+
+    font-size: 34px; /* AUMENTA ÍCONE */
+
     cursor: pointer;
+
+    z-index: 2000;
+
+    padding: 0;
+    margin: 0;
+
+    line-height: 1;
 }
 
 /* HERO */
@@ -125,24 +145,6 @@ nav ul li a:hover {
     width: 280px;
     border-radius: 30px;
 }
-
-/* BUSCA */
-
-/*.busca-section {
-    padding: 0 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.busca-section input {
-    width: 100%;
-    padding: 16px;
-    border-radius: 14px;
-    border: none;
-    font-size: 16px;
-    box-sizing: border-box;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}*/
 
 /* CATEGORIAS */
 
@@ -333,25 +335,58 @@ footer a {
         padding-bottom: 90px;
     }
 
+    /* NAVBAR MOBILE */
+
+    nav {
+        min-height: 75px;
+        padding: 0;
+    }
+
+    .nav-container {
+        min-height: 75px;
+        justify-content: center;
+    }
+
     .menu-toggle {
         display: block;
     }
 
     nav ul {
         display: none;
+
         flex-direction: column;
+
         width: 100%;
+
         background: #2C3333;
+
         position: absolute;
+
         top: 100%;
         left: 0;
+
         padding: 20px 0;
+
+        gap: 10px;
+
         z-index: 1000;
     }
 
     nav ul.show {
         display: flex;
     }
+
+    nav ul li {
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block;
+        font-size: 16px;
+        padding: 14px 0;
+    }
+
+    /* HERO */
 
     .hero {
         flex-direction: column-reverse;
@@ -366,6 +401,8 @@ footer a {
     .hero-imagem img {
         width: 180px;
     }
+
+    /* GRID */
 
     .categorias-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -449,14 +486,6 @@ footer a {
     }
 
     footer {
-        margin-bottom: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-
-    footer {
         display: none;
     }
-
 }
