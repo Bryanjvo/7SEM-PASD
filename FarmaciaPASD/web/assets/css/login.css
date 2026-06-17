@@ -126,3 +126,10 @@ button[type="reset"]:hover {
         width: 100%;
     }
 }
+
+.mensagem-erro{
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+}

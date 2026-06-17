@@ -104,6 +104,7 @@
                 <% } %>
 
                 <!-- FRETE (RESTAURADO) -->
+                <% if(!listaCarrinho.isEmpty()) { %>
                 <div class="frete-form">
                     <form action="calcular-frete" method="post">
                         <input
@@ -118,6 +119,7 @@
                         <button type="submit">Calcular Frete</button>
                     </form>
                 </div>
+                <% } %>
 
                 <%
                     String valorFrete = (String) request.getAttribute("valorFrete");
@@ -168,11 +170,19 @@
                     <button class="finalizarButton">Finalizar Compra</button>
                 </form>
 
-                <% } else { %>
+                    <% } else { %>
 
-                <h2>Calcule o frete para finalizar</h2>
+                    <% if(listaCarrinho.isEmpty()) { %>
 
-                <% } %>
+                    <h2>Carrinho vazio</h2>
+
+                    <% } else { %>
+
+                    <h2>Calcule o frete para finalizar</h2>
+
+                    <% } %>
+
+                    <% } %>
 
             </section>
 

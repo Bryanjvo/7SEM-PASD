@@ -21,7 +21,20 @@
 </head>
 <body>
     <div class="form">
+        
         <h4>Formulário de Login de Clientes</h4>
+        <%
+    String erroLogin = (String) request.getAttribute("erroLogin");
+    if (erroLogin != null) {
+        %>
+
+        <p class="mensagem-erro">
+            <%= erroLogin %>
+        </p>
+
+        <%
+            }
+        %>
         <form method="post" action="ServletLogin">
             <p> 
                 Email:

@@ -57,6 +57,7 @@ public class ServletLogin extends HttpServlet {
                 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
+                request.setAttribute("erroLogin", "Email e/ou senha incorretos.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         }
