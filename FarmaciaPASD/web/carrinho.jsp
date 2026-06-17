@@ -106,7 +106,15 @@
                 <!-- FRETE (RESTAURADO) -->
                 <div class="frete-form">
                     <form action="calcular-frete" method="post">
-                        <input type="text" name="cep" placeholder="Digite seu CEP" required>
+                        <input
+                            type="text"
+                            name="cep"
+                            placeholder="Digite seu CEP"
+                            pattern="[0-9]{8}"
+                            maxlength="8"
+                            inputmode="numeric"
+                            title="Digite um CEP válido com 8 números"
+                            required>
                         <button type="submit">Calcular Frete</button>
                     </form>
                 </div>

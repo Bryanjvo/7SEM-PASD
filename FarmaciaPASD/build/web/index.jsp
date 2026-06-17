@@ -148,13 +148,13 @@
 
             <div class="produto-card">
 
-                <img src="assets/img/drogabryan.png">
+                <img src="https://product-data.raiadrogasil.io/images/5129749.webp">
 
                 <h3>Vitamina C</h3>
 
                 <p class="preco">R$ 29,90</p>
 
-                <a href="produtos.jsp" class="comprarButton">
+                <a href="AdicionarCarrinho?idproduto=7&quantidade=1" class="comprarButton">
                     Comprar
                 </a>
 
@@ -162,13 +162,13 @@
 
             <div class="produto-card">
 
-                <img src="assets/img/drogabryan.png">
+                <img src="https://th.bing.com/th/id/OIP.9IoA1fpFKXRIZZFU6MaFaQHaHa?rs=1&pid=ImgDetMain">
 
                 <h3>Dipirona</h3>
 
-                <p class="preco">R$ 12,90</p>
+                <p class="preco">R$ 30,50</p>
 
-                <a href="produtos.jsp" class="comprarButton">
+                <a href="AdicionarCarrinho?idproduto=1&quantidade=1" class="comprarButton">
                     Comprar
                 </a>
 
@@ -176,13 +176,13 @@
 
             <div class="produto-card">
 
-                <img src="assets/img/drogabryan.png">
+                <img src="https://m.media-amazon.com/images/I/61tBTPR81dL._AC_UF1000,1000_QL80_.jpg">
 
                 <h3>Shampoo</h3>
 
-                <p class="preco">R$ 19,90</p>
+                <p class="preco">R$ 9,50</p>
 
-                <a href="produtos.jsp" class="comprarButton">
+                <a href="AdicionarCarrinho?idproduto=5&quantidade=1" class="comprarButton">
                     Comprar
                 </a>
 
@@ -190,13 +190,13 @@
 
             <div class="produto-card">
 
-                <img src="assets/img/drogabryan.png">
+                <img src="https://m.media-amazon.com/images/I/61ttuHTOJ0L._AC_SL1500_.jpg">
 
                 <h3>Protetor Solar</h3>
 
                 <p class="preco">R$ 49,90</p>
 
-                <a href="produtos.jsp" class="comprarButton">
+                <a href="AdicionarCarrinho?idproduto=8&quantidade=1" class="comprarButton">
                     Comprar
                 </a>
 
