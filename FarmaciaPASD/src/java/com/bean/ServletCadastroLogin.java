@@ -47,6 +47,16 @@ public class ServletCadastroLogin extends HttpServlet {
             login.setEndereco(endereco);
 
             LoginDAO loginDAO = new LoginDAO();
+            /* Verifica se o email já existe */
+            if (loginDAO.emailExiste(email)) {
+
+                response.sendRedirect(
+                        "cadcliente.jsp?erro=Email%20ja%20cadastrado"
+                );
+
+                return;
+            }
+            
             boolean sucesso = loginDAO.inserir(login);
 
             if (sucesso) {
@@ -98,5 +108,5 @@ public class ServletCadastroLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+ 
 }

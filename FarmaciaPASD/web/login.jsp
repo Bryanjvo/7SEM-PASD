@@ -25,11 +25,11 @@
         <form method="post" action="ServletLogin">
             <p> 
                 Email:
-                <input type="email" id="email" name="email" maxlength="40" placeholder="Email para login" />
+                <input type="email" id="email" name="email" maxlength="40" placeholder="Email para login" required />
             </p>
             <p> 
                 Senha:
-                <input type="password" id="senha" name="senha" maxlength="40" placeholder="Senha" />
+                <input type="password" id="senha" name="senha" maxlength="40" placeholder="Senha" required />
             </p>
             <div class="form-buttons">
                 <button type="submit" value="Logar">Logar</button>

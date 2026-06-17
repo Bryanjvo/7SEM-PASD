@@ -12,6 +12,19 @@
 <body>
     <div class="form">
         <h4>Formulário de Cadastro de Cliente</h4>
+        <%
+    String erro = request.getParameter("erro");
+
+    if (erro != null) {
+        %>
+
+        <div class="mensagem-erro">
+            <%= erro %>
+        </div>
+
+        <%
+            }
+        %>
         <form method="post" action="ServletCadastroLogin">
             <p> 
                 Nome:
@@ -32,10 +45,17 @@
             <div>
                 <button type="submit" value="Registrar">Cadastrar</button>
                 <button type="reset" value="Limpar">Limpar</button>
+ 
+            </div>
+            
+            <div class="login-link">
+                Já possui uma conta?
+                <a href="login.jsp">Fazer Login</a>
             </div>
         </form>
 
     </div>
 </body>
+
 
 </html>

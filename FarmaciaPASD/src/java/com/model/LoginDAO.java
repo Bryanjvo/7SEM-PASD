@@ -65,4 +65,31 @@ public class LoginDAO extends DAO {
 
         return loginBuscado;
     }
+    
+    public boolean emailExiste(String email) {
+        boolean existe = false;
+
+        try {
+            abrirBanco();
+
+            String query = "SELECT id FROM clientes WHERE email = ?";
+            pst = con.prepareStatement(query);
+            pst.setString(1, email);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                existe = true;
+            }
+
+            fecharBanco();
+
+        } catch (Exception e) {
+            System.out.println("Erro ao verificar email: " + e.getMessage());
+        }
+
+        return existe;
+    }
+    
+    
 }
