@@ -8,12 +8,16 @@
 
 
 body {
-    background-color: #E8F6EF; 
-    color: #2C3333; 
+    background-color: #E8F6EF;
+    color: #2C3333;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
+    min-height: 100vh;
+    padding: 20px 0;
+
+    overflow-y: auto;
 }
 
 
@@ -155,11 +159,13 @@ main {
 @media (max-width: 480px) {
 
     body {
-        padding: 15px;
+        padding: 20px 15px;
+        align-items: flex-start;
     }
 
     .form {
         width: 100%;
+        margin: 20px 0;
     }
 
     .form button {
