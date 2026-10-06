@@ -85,7 +85,7 @@
 
                             <p><strong>Total:</strong> R$<%= String.format("%.2f", pedido.getValorTotal()) %></p>
 
-                            <!-- BLOCO DE STATUS DA RECEITA E PAGAMENTO -->
+                            <!-- BLOCO DE STATUS DA RECEITA, PAGAMENTO E PEDIDO -->
                             <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #ddd;">
 
                                 <% if (pedido.getReceita() != null) { %>
@@ -110,6 +110,12 @@
                                     <span style="color: #dc3545; font-weight: bold;">⏳ Não Realizado</span>
                                     <% } %>
                                 </p>
+
+                                <% if ("APROVADO".equalsIgnoreCase(pedido.getStatusPagamento())) { %>
+                                <p><strong>Status do Pedido:</strong> 
+                                    <span style="color: #007bff; font-weight: bold;">📦 <%= pedido.getStatusPedido() %></span>
+                                </p>
+                                <% } %>
 
                                 <!-- BOTÃO DE PAGAMENTO (Liberado quando aprovada a receita ou sem necessidade dela) -->
                                 <% 
@@ -188,8 +194,8 @@
 
             </div>
         </footer>
-        <!-- BOTTOM NAVIGATION -->
 
+        <!-- BOTTOM NAVIGATION -->
         <div class="bottom-nav">
 
             <a href="index.jsp" class="bottom-item">
