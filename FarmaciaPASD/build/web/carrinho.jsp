@@ -28,6 +28,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DrogaBryan - Carrinho</title>
         <link rel="stylesheet" href="assets/css/carrinho.css">
+        <link rel="icon" type="image/x-icon" href="assets/img/drogabryan.png">
     </head>
 
     <body>
@@ -69,10 +70,15 @@
 
                 <%
                     double total = 0.0;
+                    boolean requerReceita = false;
 
                     for (ItemCarrinho itemcarrinho : listaCarrinho) {
                         double subtotal = itemcarrinho.getSubtotal();
                         total += subtotal;
+
+                        if (itemcarrinho.getProduto().isReceita()) {
+                            requerReceita = true;
+                        }
                 %>
 
                 <div class="item">
@@ -86,6 +92,9 @@
                             <p>Preço: R$<%= itemcarrinho.getProduto().getPreco() %></p>
                             <p>Quantidade: <%= itemcarrinho.getQuantidade() %></p>
                             <p>Subtotal: R$<%= String.format("%.2f", subtotal) %></p>
+                            <% if (itemcarrinho.getProduto().isReceita()) { %>
+                            <p style="color: #d9534f; font-weight: bold; font-size: 0.85em;">⚠️ Exige Receita Médica</p>
+                            <% } %>
                         </div>
 
                         <div class="item-acoes">
@@ -103,7 +112,7 @@
 
                 <% } %>
 
-                <!-- FRETE (RESTAURADO) -->
+                <!-- CÁLCULO DE FRETE -->
                 <% if(!listaCarrinho.isEmpty()) { %>
                 <div class="frete-form">
                     <form action="calcular-frete" method="post">
@@ -165,30 +174,42 @@
 
                 <h2>Total: R$ <%= String.format("%.2f", totalCompra) %></h2>
 
+                <% if (requerReceita) { %>
+                <!-- COM RECEITA: Envia arquivo e gera pedido pendente -->
+                <form action="ServletFinalizarPedido" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="frete" value="<%= valorFrete %>">
+                    <input type="hidden" name="prazoEntrega" value="<%= request.getAttribute("prazoEntrega") != null ? request.getAttribute("prazoEntrega") : 0 %>">
+
+                    <div class="receita-box" style="margin: 15px 0; padding: 15px; border: 2px dashed #395B64; background-color: #E8F6EF; border-radius: 8px;">
+                        <h3>⚠️ Anexo de Receita Médica</h3>
+                        <p>Seu carrinho possui medicamento(s) controlado(s). Anexe a receita médica para continuar.</p>
+                        <input type="file" name="receitaFile" accept="image/*,.pdf" required>
+                    </div>
+
+                    <button class="finalizarButton" type="submit">Enviar Receita e Finalizar Pedido</button>
+                </form>
+                <% } else { %>
+                <!-- SEM RECEITA: Segue fluxo normal para a API de Pagamento -->
                 <form action="pagar" method="post">
                     <input type="hidden" name="frete" value="<%= valorFrete %>">
-                    <button class="finalizarButton">Finalizar Compra</button>
+                    <button class="finalizarButton" type="submit">Ir para o Pagamento</button>
                 </form>
+                <% } %>
 
-                    <% } else { %>
+                <% } else { %>
 
-                    <% if(listaCarrinho.isEmpty()) { %>
+                <% if(listaCarrinho.isEmpty()) { %>
+                <h2>Carrinho vazio</h2>
+                <% } else { %>
+                <h2>Calcule o frete para finalizar</h2>
+                <% } %>
 
-                    <h2>Carrinho vazio</h2>
-
-                    <% } else { %>
-
-                    <h2>Calcule o frete para finalizar</h2>
-
-                    <% } %>
-
-                    <% } %>
+                <% } %>
 
             </section>
 
         </main>
 
-        <!-- FOOTER ORIGINAL RESTAURADO -->
         <footer>
             <div class="footer-content">
                 <ul class="autores">
@@ -213,38 +234,8 @@
                 </ul>
             </div>
         </footer>
+
         <!-- BOTTOM NAVIGATION -->
-
-        <div class="bottom-nav">
-
-            <a href="index.jsp" class="bottom-item">
-                <span>🏠</span>
-                <p>Home</p>
-            </a>
-
-            <a href="produtos.jsp" class="bottom-item active">
-                <span>🛍</span>
-                <p>Produtos</p>
-            </a>
-
-            <a href="carrinho.jsp" class="bottom-item">
-                <span>🛒</span>
-                <p>Carrinho</p>
-            </a>
-
-            <a href="pedidos.jsp" class="bottom-item">
-                <span>📦</span>
-                <p>Pedidos</p>
-            </a>
-
-            <a href="perfil.jsp" class="bottom-item">
-                <span>👤</span>
-                <p>Perfil</p>
-            </a>
-
-        </div>
-        <!-- BOTTOM NAVIGATION -->
-
         <div class="bottom-nav">
 
             <a href="index.jsp" class="bottom-item">

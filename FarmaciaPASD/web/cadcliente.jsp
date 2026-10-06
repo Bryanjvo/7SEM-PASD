@@ -40,7 +40,7 @@
             </p>
             <p> 
                 Endereço:
-                <input type="text" id="endereco" name="endereco" maxlength="40" placeholder="Endereço" required/>
+                <input type="text" id="endereco" name="endereco" maxlength="120" placeholder="Endereço" required/>
             </p>
             <div>
                 <button type="submit" value="Registrar">Cadastrar</button>

@@ -5,7 +5,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.controller.Carrinho;
 import com.controller.ItemCarrinho;
+import com.controller.Pedido;
+import com.controller.ItemPedido;
 import com.model.CarrinhoDAO;
+import com.model.PedidoDAO;
 import okhttp3.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,73 +27,100 @@ public class ServletPagamento extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // 1. Recupera o ID do cliente
         HttpSession session = request.getSession(false);
-        Integer idCliente = (session != null) 
-            ? (Integer) session.getAttribute("id") 
-            : null;
+        Integer idCliente = (session != null) ? (Integer) session.getAttribute("id") : null;
 
         if (idCliente == null) {
             response.sendRedirect("login.jsp");
             return;
         }
 
-        // 2. Busca itens do carrinho no banco
-        Carrinho carrinhoBean = new Carrinho();
-        carrinhoBean.setId_cliente(idCliente);
-        CarrinhoDAO dao = new CarrinhoDAO();
-        List<ItemCarrinho> lista = dao.listarCarrinho(carrinhoBean);
-
-        if (lista.isEmpty()) {
-            request.setAttribute("erro", "Seu carrinho está vazio!");
-            request.getRequestDispatcher("carrinho.jsp").forward(request, response);
-            return;
-        }
-
-        // ✅ 2.1. Lê valor do frete vindo da página
-        String valorFreteStr = request.getParameter("frete");
-        double valorFrete = 0.0;
-        if (valorFreteStr != null && !valorFreteStr.trim().isEmpty()) {
-            try {
-                valorFrete = Double.parseDouble(valorFreteStr.replace(",", ".")); // Trata R$ 12,50 como 12.50
-            } catch (NumberFormatException e) {
-                valorFrete = 0.0; // fallback em caso de erro
-            }
-        }
-
-        // 3. Monta o JSON dinamicamente
         JsonArray itemsArray = new JsonArray();
-        for (ItemCarrinho item : lista) {
-            JsonObject obj = new JsonObject();
-            obj.addProperty("title", item.getProduto().getNome());
-            obj.addProperty("quantity", item.getQuantidade());
-            obj.addProperty("currency_id", "BRL");
-            obj.addProperty("unit_price", item.getProduto().getPreco());
-            itemsArray.add(obj);
-        }
+        String idPedidoStr = request.getParameter("idPedido");
 
-        // ✅ 3.1. Adiciona o frete como item no JSON
-        if (valorFrete > 0) {
-            JsonObject freteObj = new JsonObject();
-            freteObj.addProperty("title", "Frete");
-            freteObj.addProperty("quantity", 1);
-            freteObj.addProperty("currency_id", "BRL");
-            freteObj.addProperty("unit_price", valorFrete);
-            itemsArray.add(freteObj);
+        // CASO 1: Pagamento de pedido existente (Receita Aprovada em pedidos.jsp)
+        if (idPedidoStr != null && !idPedidoStr.trim().isEmpty()) {
+            int idPedido = Integer.parseInt(idPedidoStr);
+            PedidoDAO pedidoDAO = new PedidoDAO();
+            Pedido pedido = pedidoDAO.buscarPedidoPorId(idPedido);
+
+            if (pedido == null) {
+                response.sendRedirect("pedidos.jsp");
+                return;
+            }
+
+            for (ItemPedido item : pedido.getItens()) {
+                JsonObject obj = new JsonObject();
+                obj.addProperty("title", item.getNomeProduto());
+                obj.addProperty("quantity", item.getQuantidade());
+                obj.addProperty("currency_id", "BRL");
+                double precoUnitario = item.getQuantidade() > 0 ? (item.getSubtotal() / item.getQuantidade()) : 0.0;
+                obj.addProperty("unit_price", precoUnitario);
+                itemsArray.add(obj);
+            }
+
+            if (pedido.getFrete() > 0) {
+                JsonObject freteObj = new JsonObject();
+                freteObj.addProperty("title", "Frete");
+                freteObj.addProperty("quantity", 1);
+                freteObj.addProperty("currency_id", "BRL");
+                freteObj.addProperty("unit_price", pedido.getFrete());
+                itemsArray.add(freteObj);
+            }
+
+        // CASO 2: Fluxo direto do Carrinho (Sem receita médica)
+        } else {
+            Carrinho carrinhoBean = new Carrinho();
+            carrinhoBean.setId_cliente(idCliente);
+            CarrinhoDAO dao = new CarrinhoDAO();
+            List<ItemCarrinho> lista = dao.listarCarrinho(carrinhoBean);
+
+            if (lista.isEmpty()) {
+                request.setAttribute("erro", "Seu carrinho está vazio!");
+                request.getRequestDispatcher("carrinho.jsp").forward(request, response);
+                return;
+            }
+
+            String valorFreteStr = request.getParameter("frete");
+            double valorFrete = 0.0;
+            if (valorFreteStr != null && !valorFreteStr.trim().isEmpty()) {
+                try {
+                    valorFrete = Double.parseDouble(valorFreteStr.replace(",", "."));
+                } catch (NumberFormatException e) {
+                    valorFrete = 0.0;
+                }
+            }
+
+            for (ItemCarrinho item : lista) {
+                JsonObject obj = new JsonObject();
+                obj.addProperty("title", item.getProduto().getNome());
+                obj.addProperty("quantity", item.getQuantidade());
+                obj.addProperty("currency_id", "BRL");
+                obj.addProperty("unit_price", item.getProduto().getPreco());
+                itemsArray.add(obj);
+            }
+
+            if (valorFrete > 0) {
+                JsonObject freteObj = new JsonObject();
+                freteObj.addProperty("title", "Frete");
+                freteObj.addProperty("quantity", 1);
+                freteObj.addProperty("currency_id", "BRL");
+                freteObj.addProperty("unit_price", valorFrete);
+                itemsArray.add(freteObj);
+            }
         }
 
         JsonObject preference = new JsonObject();
         preference.add("items", itemsArray);
         preference.add("back_urls", new JsonParser().parse("""
             {
-              "success": "https://c995-2804-14c-65c0-56c1-9ca1-42f7-3237-ba55.ngrok-free.app/FarmaciaPASD/confirmacao",
-              "failure": "https://c995-2804-14c-65c0-56c1-9ca1-42f7-3237-ba55.ngrok-free.app/FarmaciaPASD/carrinho.jsp",
-              "pending": "https://c995-2804-14c-65c0-56c1-9ca1-42f7-3237-ba55.ngrok-free.app/FarmaciaPASD/carrinho.jsp"
+              "success": "https://849d-2804-14c-65c0-56c1-5583-8e1c-5c57-5e19.ngrok-free.app/FarmaciaPASD/confirmacao",
+              "failure": "https://849d-2804-14c-65c0-56c1-5583-8e1c-5c57-5e19.ngrok-free.app/FarmaciaPASD/carrinho.jsp",
+              "pending": "https://849d-2804-14c-65c0-56c1-5583-8e1c-5c57-5e19.ngrok-free.app/FarmaciaPASD/carrinho.jsp"
             }
         """).getAsJsonObject());
         preference.addProperty("auto_return", "approved");
 
-        // 4. Configura client “trust-all” (ambiente de sandbox ou testes)
         OkHttpClient client;
         try {
             TrustManager[] trustAllCerts = new TrustManager[]{ new X509TrustManager() {
@@ -109,10 +139,8 @@ public class ServletPagamento extends HttpServlet {
             throw new ServletException("Erro ao configurar SSL", e);
         }
 
-        // 5. Envia requisição à API do Mercado Pago
         String json = preference.toString();
-        RequestBody body = RequestBody.create(
-            MediaType.parse("application/json"), json);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
         Request req = new Request.Builder()
             .url("https://api.mercadopago.com/checkout/preferences")
             .post(body)

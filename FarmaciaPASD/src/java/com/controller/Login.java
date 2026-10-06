@@ -1,61 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.controller;
 
-/**
- *
- * @author bryan
- */
 public class Login {
     private int id;
     private String nome;
     private String email;
     private String senha;
     private String endereco;
+    private String perfil; // "CLIENTE", "FARMACEUTICO" ou "ADMINISTRADOR"
+    private String crf;    // Opcional: para o farmacêutico
 
-    public int getId() {
-        return id;
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }   
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public String getSenha() {
-        return senha;
-    }
+    public String getEndereco() { return endereco; }
+    public void setEndereco(String endereco) { this.endereco = endereco; }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }   
+    public String getPerfil() { return perfil; }
+    public void setPerfil(String perfil) { this.perfil = perfil; }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-    
-    
+    public String getCrf() { return crf; }
+    public void setCrf(String crf) { this.crf = crf; }
 }
-

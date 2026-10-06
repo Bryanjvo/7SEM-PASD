@@ -84,6 +84,58 @@
                             </div>
 
                             <p><strong>Total:</strong> R$<%= String.format("%.2f", pedido.getValorTotal()) %></p>
+
+                            <!-- BLOCO DE STATUS DA RECEITA E PAGAMENTO -->
+                            <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #ddd;">
+
+                                <% if (pedido.getReceita() != null) { %>
+                                <p><strong>Status da Receita:</strong> 
+                                    <% if ("PENDENTE".equalsIgnoreCase(pedido.getReceita().getStatus())) { %>
+                                    <span style="color: #f0ad4e; font-weight: bold;">⏳ Em Análise</span>
+                                    <% } else if ("APROVADA".equalsIgnoreCase(pedido.getReceita().getStatus())) { %>
+                                    <span style="color: #28a745; font-weight: bold;">✅ Aprovada</span>
+                                    <% } else if ("REJEITADA".equalsIgnoreCase(pedido.getReceita().getStatus())) { %>
+                                    <span style="color: #dc3545; font-weight: bold;">❌ Rejeitada</span>
+                                    <% if (pedido.getReceita().getMotivo_rejeicao() != null) { %>
+                                    <br><small style="color: #666;">Motivo: <%= pedido.getReceita().getMotivo_rejeicao() %></small>
+                                    <% } %>
+                                    <% } %>
+                                </p>
+                                <% } %>
+
+                                <p><strong>Status do Pagamento:</strong> 
+                                    <% if ("APROVADO".equalsIgnoreCase(pedido.getStatusPagamento())) { %>
+                                    <span style="color: #28a745; font-weight: bold;">✅ Pago</span>
+                                    <% } else { %>
+                                    <span style="color: #dc3545; font-weight: bold;">⏳ Não Realizado</span>
+                                    <% } %>
+                                </p>
+
+                                <!-- BOTÃO DE PAGAMENTO (Liberado quando aprovada a receita ou sem necessidade dela) -->
+                                <% 
+                                   boolean liberadoParaPagamento = false;
+                                   if (!"APROVADO".equalsIgnoreCase(pedido.getStatusPagamento())) {
+                                       if (pedido.getReceita() == null || "APROVADA".equalsIgnoreCase(pedido.getReceita().getStatus())) {
+                                           liberadoParaPagamento = true;
+                                       }
+                                   }
+                                %>
+
+                                <% if (liberadoParaPagamento) { %>
+                                <form action="pagar" method="post" style="margin-top: 10px;">
+                                    <input type="hidden" name="idPedido" value="<%= pedido.getId() %>">
+                                    <button type="submit" style="background-color: #28a745; color: white; padding: 10px 18px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                                        💳 Pagar Agora
+                                    </button>
+                                </form>
+                                <% } else if (pedido.getReceita() != null && "PENDENTE".equalsIgnoreCase(pedido.getReceita().getStatus())) { %>
+                                <p style="font-size: 0.85em; color: #555; margin-top: 5px;">
+                                    ℹ️ O botão de pagamento será liberado assim que o farmacêutico aprovar sua receita médica.
+                                </p>
+                                <% } %>
+
+                            </div>
+
                         </div>
                     </div>
 

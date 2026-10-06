@@ -2,8 +2,8 @@
 <%@ page session="true" %>
 
 <%
-    String usuario = (String) session.getAttribute("usuario");
     String nome = (String) session.getAttribute("nome");
+    String perfil = (String) session.getAttribute("perfil");
 %>
 
 <!DOCTYPE html>
@@ -31,16 +31,23 @@
 
                 <li><a href="index.jsp">Home</a></li>
 
-                <% if (usuario == null) { %>
+                <% if (perfil == null) { %>
+                    <!-- Visitante / Não Logado -->
                     <li><a href="produtos.jsp">Produtos</a></li>
-                <% } else { %>
-                    <li><a href="view/viewFuncionario/Produtofuncionario.jsp">ProdutosFuncionario</a></li>
-                <% } %>
-
-                <% if (nome == null) { %>
                     <li><a href="login.jsp">Login</a></li>
                     <li><a href="cadcliente.jsp">Cadastre-se</a></li>
+
+                <% } else if ("FARMACEUTICO".equals(perfil)) { %>
+                    <!-- Menu Exclusivo do Farmacêutico -->
+                    <li><a href="view/viewFuncionario/Produtofuncionario.jsp">Produtos (Gestão)</a></li>
+                    <li><a href="ServletListarReceitas?status=PENDENTE">Receitas Pendentes</a></li>
+                    <li><a href="ServletListarReceitas?status=HISTORICO">Histórico de Receitas</a></li>
+                    <li><a href="perfil.jsp">Meu Perfil</a></li>
+                    <li><a href="logout">Logout</a></li>
+
                 <% } else { %>
+                    <!-- Menu do Cliente -->
+                    <li><a href="produtos.jsp">Produtos</a></li>
                     <li><a href="carrinho.jsp">Carrinho</a></li>
                     <li><a href="pedidos.jsp">Pedidos</a></li>
                     <li><a href="perfil.jsp">Meu Perfil</a></li>
@@ -82,14 +89,6 @@
 
     </section>
 
-    <!-- BUSCA -->
-    <!-- <section class="busca-section">
-
-        <input type="text"
-               placeholder="Buscar medicamentos, vitaminas, produtos...">
-
-    </section> -->
-
     <!-- CATEGORIAS -->
     <section class="categorias">
 
@@ -126,7 +125,7 @@
 
         <div class="promo-card">
             <h3>Frete grátis</h3>
-            <p>Em compras acima de R$99999</p>
+            <p>Em compras acima de R$99</p>
         </div>
 
         <div class="promo-card">
@@ -147,59 +146,48 @@
         <div class="produtos-scroll">
 
             <div class="produto-card">
-
                 <img src="https://product-data.raiadrogasil.io/images/5129749.webp">
-
                 <h3>Vitamina C</h3>
-
                 <p class="preco">R$ 29,90</p>
-
                 <a href="AdicionarCarrinho?idproduto=7&quantidade=1" class="comprarButton">
                     Comprar
                 </a>
-
             </div>
 
             <div class="produto-card">
-
                 <img src="https://th.bing.com/th/id/OIP.9IoA1fpFKXRIZZFU6MaFaQHaHa?rs=1&pid=ImgDetMain">
-
                 <h3>Dipirona</h3>
-
                 <p class="preco">R$ 30,50</p>
-
                 <a href="AdicionarCarrinho?idproduto=1&quantidade=1" class="comprarButton">
                     Comprar
                 </a>
-
             </div>
 
             <div class="produto-card">
-
                 <img src="https://m.media-amazon.com/images/I/61tBTPR81dL._AC_UF1000,1000_QL80_.jpg">
-
                 <h3>Shampoo</h3>
-
                 <p class="preco">R$ 9,50</p>
-
                 <a href="AdicionarCarrinho?idproduto=5&quantidade=1" class="comprarButton">
                     Comprar
                 </a>
-
             </div>
 
             <div class="produto-card">
-
                 <img src="https://m.media-amazon.com/images/I/61ttuHTOJ0L._AC_SL1500_.jpg">
-
                 <h3>Protetor Solar</h3>
-
                 <p class="preco">R$ 49,90</p>
-
                 <a href="AdicionarCarrinho?idproduto=8&quantidade=1" class="comprarButton">
                     Comprar
                 </a>
-
+            </div>
+            
+            <div class="produto-card">
+                <img src="https://product-data.raiadrogasil.io/images/5037443.webp">
+                <h3>Repelente</h3>
+                <p class="preco">R$ 15,30</p>
+                <a href="AdicionarCarrinho?idproduto=9&quantidade=1" class="comprarButton">
+                    Comprar
+                </a>
             </div>
 
         </div>
@@ -214,7 +202,6 @@
 
         <ul class="autores">
             <h3>Autor</h3>
-
             <li>
                 <img class="autoresImg" src="assets/img/github-mark.png">
                 <a href="https://github.com/Bryanjvo">Bryan</a>
@@ -223,12 +210,10 @@
 
         <ul>
             <h3>Contato</h3>
-
             <li>
                 <img class="autoresImg" src="assets/img/telefone.png">
                 (61) 91234-5678
             </li>
-
             <li>
                 <img class="autoresImg" src="assets/img/email.png">
                 drogabryan@gmail.com
@@ -237,7 +222,6 @@
 
         <ul>
             <h3>Endereço</h3>
-
             <li>Taguatinga - Brasília/DF</li>
         </ul>
 
@@ -246,7 +230,6 @@
 </footer>
 
 <!-- BOTTOM NAVIGATION -->
-
 <div class="bottom-nav">
 
     <a href="index.jsp" class="bottom-item active">
@@ -254,20 +237,29 @@
         <p>Home</p>
     </a>
 
-    <a href="produtos.jsp" class="bottom-item">
-        <span>🛍</span>
-        <p>Produtos</p>
-    </a>
-
-    <a href="carrinho.jsp" class="bottom-item">
-        <span>🛒</span>
-        <p>Carrinho</p>
-    </a>
-    
-    <a href="pedidos.jsp" class="bottom-item">
-        <span>📦</span>
-        <p>Pedidos</p>
-    </a>
+    <% if ("FARMACEUTICO".equals(perfil)) { %>
+        <a href="ServletListarReceitas?status=PENDENTE" class="bottom-item">
+            <span>📋</span>
+            <p>Pendentes</p>
+        </a>
+        <a href="ServletListarReceitas?status=HISTORICO" class="bottom-item">
+            <span>📜</span>
+            <p>Histórico</p>
+        </a>
+    <% } else { %>
+        <a href="produtos.jsp" class="bottom-item">
+            <span>🛍</span>
+            <p>Produtos</p>
+        </a>
+        <a href="carrinho.jsp" class="bottom-item">
+            <span>🛒</span>
+            <p>Carrinho</p>
+        </a>
+        <a href="pedidos.jsp" class="bottom-item">
+            <span>📦</span>
+            <p>Pedidos</p>
+        </a>
+    <% } %>
 
     <a href="perfil.jsp" class="bottom-item">
         <span>👤</span>
@@ -277,11 +269,9 @@
 </div>
 
 <script>
-
 function toggleMenu() {
     document.getElementById("menu").classList.toggle("show");
 }
-
 </script>
 
 </body>

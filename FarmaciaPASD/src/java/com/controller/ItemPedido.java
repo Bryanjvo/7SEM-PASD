@@ -1,25 +1,48 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.controller;
 
-/**
- *
- * @author bryan
- */
 public class ItemPedido {
+    private int idPedido;
+    private int idProduto;
     private String nomeProduto;
     private int quantidade;
     private double subtotal;
 
-    // Construtor
+    // Construtor vazio (necessário para instanciação padrão)
+    public ItemPedido() {
+    }
+
+    // Construtor mantido para compatibilidade com códigos legados
     public ItemPedido(String nomeProduto, int quantidade, double subtotal) {
         this.nomeProduto = nomeProduto;
         this.quantidade = quantidade;
         this.subtotal = subtotal;
     }
-    
+
+    // Construtor completo
+    public ItemPedido(int idPedido, int idProduto, String nomeProduto, int quantidade, double subtotal) {
+        this.idPedido = idPedido;
+        this.idProduto = idProduto;
+        this.nomeProduto = nomeProduto;
+        this.quantidade = quantidade;
+        this.subtotal = subtotal;
+    }
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public int getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
+    }
+
     public String getNomeProduto() {
         return nomeProduto;
     }
@@ -44,4 +67,3 @@ public class ItemPedido {
         this.subtotal = subtotal;
     }
 }
-
