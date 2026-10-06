@@ -151,4 +151,25 @@ public class PedidoDAO extends DAO {
         }
         return p;
     }
+
+    public boolean atualizarStatusPagamento(int idPedido, String novoStatus) {
+        String sql = "UPDATE pedidos SET status_pagamento = ? WHERE id = ?";
+        try {
+            abrirBanco();
+            pst = con.prepareStatement(sql);
+            pst.setString(1, novoStatus);
+            pst.setInt(2, idPedido);
+            int rows = pst.executeUpdate();
+            return rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                fecharBanco();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 }

@@ -13,9 +13,30 @@ public class ReceitaMedica {
     private Integer id_farmaceutico;
     private String motivo_rejeicao;
 
+    // Campos auxiliares (obtidos via JOIN com a tabela clientes)
+    private String nomeCliente;
+    private String emailCliente;
+
     public ReceitaMedica() {}
 
-    // Getters e Setters
+    // Getters e Setters dos novos campos
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
+    public String getEmailCliente() {
+        return emailCliente;
+    }
+
+    public void setEmailCliente(String emailCliente) {
+        this.emailCliente = emailCliente;
+    }
+
+    // Getters e Setters existentes
     public int getId() {
         return id;
     }

@@ -2,7 +2,7 @@ package com.bean;
 
 import com.controller.Carrinho;
 import com.controller.ItemCarrinho;
-import com.controller.Pedido; // Adicionado import do Pedido
+import com.controller.Pedido;
 import com.model.CarrinhoDAO;
 import com.model.PedidoDAO;
 
@@ -37,17 +37,35 @@ public class ServletConfirmacaoPagamento extends HttpServlet {
             return;
         }
 
+        // 3️⃣ VERIFICA SE É UM PAGAMENTO DE UM PEDIDO JÁ EXISTENTE
+        String externalRef = request.getParameter("external_reference");
+        if (externalRef != null && !externalRef.trim().isEmpty()) {
+            try {
+                int idPedidoExistente = Integer.parseInt(externalRef);
+                PedidoDAO pedidoDAO = new PedidoDAO();
+                
+                // Atualiza o status do pedido existente para "APROVADO"
+                pedidoDAO.atualizarStatusPagamento(idPedidoExistente, "APROVADO");
+                
+                // Redireciona de volta para a lista de pedidos
+                response.sendRedirect("pedidos.jsp");
+                return;
+            } catch (NumberFormatException e) {
+                Logger.getLogger(ServletConfirmacaoPagamento.class.getName()).log(Level.SEVERE, "Erro ao converter ID do pedido no retorno do pagamento", e);
+            }
+        }
+
+        // 4️⃣ FLUXO PADRÃO: Novo pedido vindo direto do Carrinho
         String fretePrecoStr = (String) session.getAttribute("fretePreco");
         double fretePreco = 0.0;
         if (fretePrecoStr != null) {
             try {
                 fretePreco = Double.parseDouble(fretePrecoStr.replace(",", "."));
             } catch (NumberFormatException e) {
-                fretePreco = 0.0; // fallback se o valor não for um número válido
+                fretePreco = 0.0;
             }
         }
         
-        // Recupera o prazo com validação de nulo para evitar NullPointerException
         Object prazoObj = session.getAttribute("fretePrazo");
         int fretePrazo = 0;
         if (prazoObj != null) {
@@ -62,7 +80,6 @@ public class ServletConfirmacaoPagamento extends HttpServlet {
             }
         }
 
-        // 3️⃣ Busca itens do carrinho
         CarrinhoDAO carrinhoDAO = new CarrinhoDAO();
         Carrinho carrinhoBean = new Carrinho();
         carrinhoBean.setId_cliente(idCliente);
@@ -73,7 +90,6 @@ public class ServletConfirmacaoPagamento extends HttpServlet {
             return;
         }
 
-        // 4️⃣ Monta o objeto Pedido e faz o cadastro via PedidoDAO
         try {
             double subtotalItens = 0.0;
             for (ItemCarrinho item : itens) {
@@ -81,7 +97,6 @@ public class ServletConfirmacaoPagamento extends HttpServlet {
             }
             double totalCompra = subtotalItens + fretePreco;
 
-            // Instancia o Pedido com status "APROVADO"
             Pedido pedido = new Pedido();
             pedido.setIdCliente(idCliente);
             pedido.setValorTotal(totalCompra);
@@ -89,15 +104,11 @@ public class ServletConfirmacaoPagamento extends HttpServlet {
             pedido.setPrazoEntrega(fretePrazo);
             pedido.setStatusPagamento("APROVADO");
 
-            // O cadastrarPedido já cria o pedido E insere os itens em pedido_produto
             PedidoDAO pedidoDAO = new PedidoDAO();
             int idPedido = pedidoDAO.cadastrarPedido(pedido, itens);
 
             if (idPedido > 0) {
-                // 5️⃣ Limpa carrinho após pedido registrado com sucesso
                 carrinhoDAO.limparCarrinho(idCliente);
-
-                // 6️⃣ Redireciona para a página de pedidos
                 response.sendRedirect("pedidos.jsp");
             } else {
                 response.sendRedirect("erro.jsp");

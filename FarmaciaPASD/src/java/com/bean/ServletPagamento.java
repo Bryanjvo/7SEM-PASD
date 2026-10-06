@@ -112,6 +112,12 @@ public class ServletPagamento extends HttpServlet {
 
         JsonObject preference = new JsonObject();
         preference.add("items", itemsArray);
+
+        // REGISTRA O ID DO PEDIDO NA PREFERÊNCIA DO MERCADO PAGO SE FOR UM PEDIDO EXISTENTE
+        if (idPedidoStr != null && !idPedidoStr.trim().isEmpty()) {
+            preference.addProperty("external_reference", idPedidoStr);
+        }
+
         preference.add("back_urls", new JsonParser().parse("""
             {
               "success": "https://849d-2804-14c-65c0-56c1-5583-8e1c-5c57-5e19.ngrok-free.app/FarmaciaPASD/confirmacao",
