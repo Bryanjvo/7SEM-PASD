@@ -8,11 +8,13 @@ public class Pedido {
     private String dataPedido;
     private double valorTotal;
     private int idCliente;
+    private String nomeCliente; // Nome do cliente para o Admin
     private double frete;
     private int prazoEntrega;
-    private String statusPagamento = "PENDENTE"; // 'PENDENTE', 'APROVADO', 'CANCELADO'
+    private String statusPagamento = "PENDENTE";
+    private String statusPedido = "em separacao"; // 'em separacao', 'saiu para entrega', 'entregue!'
     private List<ItemPedido> itens = new ArrayList<>();
-    private ReceitaMedica receita; // Receita médica associada ao pedido
+    private ReceitaMedica receita;
 
     public Pedido() {}
 
@@ -28,6 +30,9 @@ public class Pedido {
     public int getIdCliente() { return idCliente; }
     public void setIdCliente(int idCliente) { this.idCliente = idCliente; }
 
+    public String getNomeCliente() { return nomeCliente; }
+    public void setNomeCliente(String nomeCliente) { this.nomeCliente = nomeCliente; }
+
     public double getFrete() { return frete; }
     public void setFrete(double frete) { this.frete = frete; }
 
@@ -36,6 +41,9 @@ public class Pedido {
 
     public String getStatusPagamento() { return statusPagamento; }
     public void setStatusPagamento(String statusPagamento) { this.statusPagamento = statusPagamento; }
+
+    public String getStatusPedido() { return statusPedido; }
+    public void setStatusPedido(String statusPedido) { this.statusPedido = statusPedido; }
 
     public List<ItemPedido> getItens() { return itens; }
     public void setItens(List<ItemPedido> itens) { this.itens = itens; }

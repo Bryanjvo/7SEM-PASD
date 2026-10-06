@@ -70,6 +70,7 @@ public class PedidoDAO extends DAO {
                 p.setFrete(rs.getDouble("frete"));
                 p.setPrazoEntrega(rs.getInt("prazoEntrega"));
                 p.setStatusPagamento(rs.getString("status_pagamento"));
+                p.setStatusPedido(rs.getString("status_pedido")); // <-- LINHA ADICIONADA AQUI
 
                 p.setItens(carregarItensPedido(p.getId()));
                 p.setReceita(receitaDAO.buscarPorPedido(p.getId()));
@@ -172,4 +173,73 @@ public class PedidoDAO extends DAO {
             }
         }
     }
+    
+    // Retorna a quantidade de pedidos feitos no mês atual para o Relatório do Dashboard
+    public int contarPedidosMesAtual() {
+        int total = 0;
+        String sql = "SELECT COUNT(*) FROM pedidos WHERE MONTH(data_pedido) = MONTH(CURRENT_DATE()) AND YEAR(data_pedido) = YEAR(CURRENT_DATE())";
+        try {
+            abrirBanco();
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+            fecharBanco();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+
+    // Lista todos os pedidos para o Administrador gerenciar o status de entrega
+    public List<Pedido> listarTodosPedidosAdmin() {
+        List<Pedido> lista = new ArrayList<>();
+        String sql = "SELECT p.*, c.nome AS nome_cliente FROM pedidos p "
+                + "JOIN clientes c ON p.id_cliente = c.id "
+                + "ORDER BY p.id DESC";
+        try {
+            abrirBanco();
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Pedido p = new Pedido();
+                p.setId(rs.getInt("id"));
+                p.setDataPedido(rs.getString("data_pedido"));
+                p.setValorTotal(rs.getDouble("valor_total"));
+                p.setIdCliente(rs.getInt("id_cliente"));
+                p.setNomeCliente(rs.getString("nome_cliente"));
+                p.setFrete(rs.getDouble("frete"));
+                p.setPrazoEntrega(rs.getInt("prazoEntrega"));
+                p.setStatusPagamento(rs.getString("status_pagamento"));
+                p.setStatusPedido(rs.getString("status_pedido"));
+                p.setItens(carregarItensPedido(p.getId()));
+                lista.add(p);
+            }
+            fecharBanco();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    // Atualiza o status do pedido (em separacao, saiu para entrega, entregue!)
+    public boolean atualizarStatusPedido(int idPedido, String novoStatus) {
+        String sql = "UPDATE pedidos SET status_pedido = ? WHERE id = ?";
+        try {
+            abrirBanco();
+            pst = con.prepareStatement(sql);
+            pst.setString(1, novoStatus);
+            pst.setInt(2, idPedido);
+            int rows = pst.executeUpdate();
+            fecharBanco();
+            return rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    
 }
