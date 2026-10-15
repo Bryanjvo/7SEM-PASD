@@ -3,10 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/bryan/OneDrive/Documentos/GitHub/7SEM-PASD/FarmaciaPASD/src/java/com/model/PedidoDAO.java</file>
-            <file>file:/C:/Users/bryan/OneDrive/Documentos/GitHub/7SEM-PASD/FarmaciaPASD/src/java/com/bean/ServletFinalizarPedido.java</file>
-            <file>file:/C:/Users/bryan/OneDrive/Documentos/GitHub/7SEM-PASD/FarmaciaPASD/src/java/com/bean/ServletConfirmacaoPagamento.java</file>
-            <file>file:/C:/Users/bryan/OneDrive/Documentos/GitHub/7SEM-PASD/FarmaciaPASD/src/java/com/bean/ServletPagamento.java</file>
+            <file>file:/C:/Users/bryan/OneDrive/Documentos/GitHub/7SEM-PASD/FarmaciaPASD/web/login.jsp</file>
         </group>
     </open-files>
 </project-private>

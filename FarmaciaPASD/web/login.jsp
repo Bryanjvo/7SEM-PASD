@@ -22,7 +22,7 @@
 <body>
     <div class="form">
         
-        <h4>Formulário de Login de Clientes</h4>
+        <h4>Formulário de Login</h4>
         <%
     String erroLogin = (String) request.getAttribute("erroLogin");
     if (erroLogin != null) {
